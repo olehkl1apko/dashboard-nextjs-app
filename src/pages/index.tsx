@@ -19,7 +19,6 @@ export default function Home() {
         <Header />
         <SideMenu />
         <Dashboard />
-        <Login />
       </main>
     </>
   );
