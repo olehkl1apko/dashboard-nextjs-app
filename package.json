@@ -35,6 +35,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
+    "@mui/styles": "^5.15.14",
     "@mui/x-data-grid": "^6.19.8",
     "@mui/x-data-grid-generator": "^6.19.8",
     "@types/chart.js": "^2.9.41",
