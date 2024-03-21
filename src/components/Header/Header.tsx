@@ -17,13 +17,15 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import { pages } from "@/components/constants";
+import { pages } from "@/constants";
+import ThemeToggleButton from "@/components/ThemeToggleButton";
 
 export type HeaderProps = {
   ColorModeContext: Context<{ toggleColorMode: () => void }>;
 };
 
 const Header = (props: HeaderProps) => {
+  const { ColorModeContext } = props;
   const { data: session } = useSession();
   const userProfileImg = session?.user?.image as string;
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -140,7 +142,7 @@ const Header = (props: HeaderProps) => {
               <Typography>Signed in as {session?.user?.email}</Typography>
             </Box>
           )}
-          {/* <ThemeToggleButton ColorModeContext={ColorModeContext} /> */}
+          <ThemeToggleButton ColorModeContext={ColorModeContext} />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
