@@ -2,14 +2,9 @@ import { Paper, Typography, Tooltip, IconButton } from "@mui/material";
 import { InfoOutlined as InfoOutlinedIcon } from "@mui/icons-material";
 
 import scss from "./DataCard.module.scss";
+import { IDataRibbon } from "@/modules";
 
-export type DataCardProps = {
-  title: string;
-  value: string;
-  description: string;
-};
-
-export const DataCard = (props: DataCardProps) => {
+export const DataCard = (props: IDataRibbon) => {
   const { title, value, description } = props;
   return (
     <Paper className={scss.dataCard}>

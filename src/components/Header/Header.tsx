@@ -84,7 +84,9 @@ const Header = (props: HeaderProps) => {
           </Typography>
           {tabletCheck && (
             <Box sx={{ paddingRight: 5, marginLeft: "auto" }}>
-              <Typography>Signed in as {session?.user?.email}</Typography>
+              {session && (
+                <Typography>Signed in as {session.user?.email}</Typography>
+              )}
             </Box>
           )}
           <ThemeToggleButton ColorModeContext={ColorModeContext} />

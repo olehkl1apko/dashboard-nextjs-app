@@ -109,11 +109,7 @@ const SideMenu = () => {
     >
       <div className={scss.drawerHeader}>
         <IconButton onClick={handleDrawerToggle}>
-          {theme.direction === "rtl" ? (
-            <ChevronRightIcon />
-          ) : (
-            <ChevronLeftIcon />
-          )}
+          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </div>
       <Divider />

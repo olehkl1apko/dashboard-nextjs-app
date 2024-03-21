@@ -11,6 +11,11 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import { profileFormFields } from "@/constants";
+
+interface FormData {
+  [key: string]: string | boolean;
+}
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -23,10 +28,10 @@ const Profile = () => {
     lastName = names.length > 1 ? names[names.length - 1] : "";
   }
 
-  const [formData, setFormData] = useState({
-    firstName,
-    lastName,
-    email: session?.user?.email,
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    email: session?.user?.email || "",
     password: "",
     confirmPassword: "",
     receiveEmails: false,
@@ -70,72 +75,38 @@ const Profile = () => {
                 style={{ maxWidth: 600, margin: "0 auto" }}
               >
                 <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      fullWidth
-                      label="First Name"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleFormChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      required
-                      fullWidth
-                      label="Last Name"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleFormChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      type="email"
-                      label="Email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleFormChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      type="password"
-                      label="Password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleFormChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      required
-                      fullWidth
-                      type="password"
-                      label="Confirm Password"
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleFormChange}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          name="receiveEmails"
-                          checked={formData.receiveEmails}
-                          onChange={handleFormChange}
-                          color="primary"
-                        />
-                      }
-                      label="Receive sales analytics emails"
-                    />
-                  </Grid>
+                  {profileFormFields.map(({ name, type, label, required }) => {
+                    if (type !== "checkbox") {
+                      return (
+                        <Grid item xs={12} sm={6} key={name}>
+                          <TextField
+                            required={required}
+                            fullWidth
+                            label={label}
+                            name={name}
+                            value={formData[name] as string}
+                            onChange={handleFormChange}
+                          />
+                        </Grid>
+                      );
+                    } else {
+                      return (
+                        <Grid item xs={12} key={name}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                name={name}
+                                checked={formData[name] as boolean}
+                                onChange={handleFormChange}
+                                color="primary"
+                              />
+                            }
+                            label={label}
+                          />
+                        </Grid>
+                      );
+                    }
+                  })}
                   <Grid item xs={12}>
                     <Button type="submit" variant="contained" color="primary">
                       Save Changes
