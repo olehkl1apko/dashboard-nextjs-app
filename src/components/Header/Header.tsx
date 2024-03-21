@@ -1,6 +1,5 @@
 import { useState, MouseEvent } from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
-
 import {
   AppBar,
   Box,
@@ -17,8 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { pages } from "@/components/constants";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -41,8 +39,6 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
