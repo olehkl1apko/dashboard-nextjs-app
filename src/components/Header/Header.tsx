@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, Context } from "react";
 import { signOut, signIn, useSession } from "next-auth/react";
 import {
   AppBar,
@@ -12,13 +12,18 @@ import {
   Avatar,
   Button,
   Tooltip,
+  useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 
 import { pages } from "@/components/constants";
 
-const Header = () => {
+export type HeaderProps = {
+  ColorModeContext: Context<{ toggleColorMode: () => void }>;
+};
+
+const Header = (props: HeaderProps) => {
   const { data: session } = useSession();
   const userProfileImg = session?.user?.image as string;
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -38,6 +43,8 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const tabletCheck = useMediaQuery("(min-width: 768px)");
 
   return (
     <AppBar position="static">
@@ -59,7 +66,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            DataSoft
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -115,7 +122,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            LOGO
+            DataSoft
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -128,9 +135,12 @@ const Header = () => {
               </Button>
             ))}
           </Box>
-          <Box sx={{ paddingRight: 5 }}>
-            <Typography>Signed in as {session?.user?.email}</Typography>
-          </Box>
+          {tabletCheck && (
+            <Box sx={{ paddingRight: 5 }}>
+              <Typography>Signed in as {session?.user?.email}</Typography>
+            </Box>
+          )}
+          {/* <ThemeToggleButton ColorModeContext={ColorModeContext} /> */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open profile settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
