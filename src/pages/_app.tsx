@@ -1,7 +1,6 @@
 import { createContext, useState, useMemo } from "react";
 import { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
-import { useRouter } from "next/router";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
@@ -15,7 +14,6 @@ const ColorModeContext = createContext({
 });
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-  const router = useRouter();
   const [mode, setMode] = useState<"light" | "dark">("dark");
   const colorMode = useMemo(
     () => ({
