@@ -9,6 +9,7 @@ import {
   ExitToApp as ExitToAppIcon,
   Person2 as Person2Icon,
   Equalizer as EqualizerIcon,
+  Home as HomeIcon,
   Settings,
 } from "@mui/icons-material";
 import {
@@ -50,9 +51,16 @@ const closedMixin = (theme: Theme): CSSObject => ({
   },
 });
 
-const menuRouteList = ["data", "profile", "settings", ""];
-const menuListTranslations = ["Data", "Profile", "Settings", "Sign Out"];
+const menuRouteList = ["", "data", "profile", "settings", ""];
+const menuListTranslations = [
+  "Home",
+  "Data",
+  "Profile",
+  "Settings",
+  "Sign Out",
+];
 const menuListIcons = [
+  <HomeIcon />,
   <EqualizerIcon />,
   <Person2Icon />,
   <Settings />,
